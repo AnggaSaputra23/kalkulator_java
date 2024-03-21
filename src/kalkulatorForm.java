@@ -1,4 +1,4 @@
-
+import java.sql.*;
 import javax.swing.JOptionPane;
 
 /*
@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
  */
 public class kalkulatorForm extends javax.swing.JFrame {
 
+    CRUD aa = new CRUD();
     /**
      * Creates new form kalkulatorForm
      */
@@ -147,29 +148,39 @@ public class kalkulatorForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         Double angka1, angka2, hasil = null;
         String operator;
-
+//
         angka1 = Double.valueOf(txtAngka1.getText());
         angka2 = Double.valueOf(txtAngka2.getText());
         operator = (String) cbOperator.getSelectedItem();
-        hasil = App.hitung(angka1, angka2, operator);
+//        hasil = App.hitung(angka1, angka2, operator);
 
-//        if (operator.equals("+")) {
-////            hasil = angka1 + angka2;
+        if (operator.equals("+")) {
+            hasil = angka1 + angka2;
 //            hasil = penjumlahan(angka1, angka2);
-//        } else if (operator.equals("-")) {
-////            hasil = angka1 - angka2;
+        } else if (operator.equals("-")) {
+            hasil = angka1 - angka2;
 //            hasil = pengurangan(angka1, angka2);
-//        } else if (operator.equals("*")) {
-////            hasil = angka1 * angka2;
+        } else if (operator.equals("*")) {
+            hasil = angka1 * angka2;
 //            hasil = perkalian(angka1, angka2);
-//        } else if (operator.equals("/")) {
-////            hasil = angka1 / angka2;
+        } else if (operator.equals("/")) {
+            hasil = angka1 / angka2;
 //            hasil = pembagian(angka1, angka2);
-//        }
-        JOptionPane.showMessageDialog(null, "Hasil dari " + angka1 + " " + operator + " " + angka2 + " = " + hasil);
+        }
+//        JOptionPane.showMessageDialog(null, "Hasil dari " + angka1 + " " + operator + " " + angka2 + " = " + hasil);
 //        txtAngka1.setText("");
 //        txtAngka2.setText("");
 //        cbOperator.setSelectedIndex(0);
+        try{
+            aa.setAngka1(angka1);
+            aa.setAngka2(angka2);
+            aa.setOperator(operator);
+            aa.setHasil(hasil);
+            aa.simpanData(aa.getAngka1(), aa.getAngka2(), aa.getOperator(), aa.getHasil());
+             JOptionPane.showMessageDialog(null, "Hasil dari " + angka1 + " " + operator + " " + angka2 + " = " + hasil);
+        }catch(Exception e){
+            System.out.println(e);
+        }
     }//GEN-LAST:event_btnActionPerformed
 
     private void txtAngka1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAngka1KeyTyped
